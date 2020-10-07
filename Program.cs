@@ -40,7 +40,6 @@ namespace UpdateSPInclude
             catch (Exception ex)
             {
                 Console.WriteLine($"ERROR: Failed to get data from API using {url}");
-                Console.WriteLine("'404 not found' likely indicates an invalid build definition ID\n");
                 throw ex;
             }
         }
@@ -71,7 +70,6 @@ namespace UpdateSPInclude
             catch (Exception ex)
             {
                 Console.WriteLine($"ERROR: Failed to post data to API using {url}");
-                Console.WriteLine("'400 bad request' might mean there were no changes to check in, but that should be handled\n");
                 throw ex;
             }
         }
@@ -468,7 +466,7 @@ namespace UpdateSPInclude
 
         private static async void UpdateSPInclude_API(string APIPath, List<string> reports, List<string> assemblies, string accessToken)
         {
-            //Deserialize the data currently stored in the json (change variable in string below when done testing).
+            //Deserialize the data currently stored in the json
             Console.WriteLine($"Getting current ServicePackInclude.json from the AZDO repository at {APIPath} ...\n");
             string APIRequestURL = $"https://dev.azure.com/ViewpointVSO/Vista/_apis/tfvc/items?path={APIPath}&includeContent=true&api-version=5.1";
             string spJson = await GetJson(accessToken, APIRequestURL);
